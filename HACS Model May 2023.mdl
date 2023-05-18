@@ -1,0 +1,343 @@
+{UTF-8}
+********************************************************
+	.13mayhacsbasecreditchanged
+********************************************************~
+		<?xml version="1.0" encoding="UTF-8"?>
+		<richtext version="1.0.0.0" xmlns="http://www.wxwidgets.org">
+		  <paragraphlayout textcolor="#000000" fontpointsize="9" fontfamily="70" \
+		fontstyle="90" fontweight="400" fontunderlined="0" fontface="Segoe UI" \
+		alignment="1" parspacingafter="10" parspacingbefore="0" linespacing="10" \
+		margin-left="5,4098" margin-right="5,4098" margin-top="5,4098" \
+		margin-bottom="5,4098">
+		    <paragraph>
+		      <text>Values and Descriptions</text>
+		    </paragraph>
+		    <paragraph>
+		      <text></text>
+		    </paragraph>
+		    <paragraph>
+		      <text>10 tonnes per hectare the amount of carbon sequestered per hectare of \
+		land</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>4.9 million hectares total area of available land for hemp cultivation \
+		in Ireland</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>An average of 22 million tonnes CO2 emissions from agriculture is used \
+		for annual emissions</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>A look-up table based on the annual tax rate and is used for the carbon \
+		tax rate</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>HPRA data number of licenses issued and the number of hectares \
+		cultivated</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>&#8364;500 per hectare average agriculture and hemp income</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>0.011% fraction of initial land result from QDA</text>
+		    </paragraph>
+		    <paragraph>
+		      <text></text>
+		    </paragraph>
+		    <paragraph>
+		      <text>&#8364;13.156 billion total approximate carbon tax receipts up to \
+		2030</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>based on 22 million average annual CO2 emissions from agriculture</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>&#8364;9.8 billion in budget Cap Plan 2030 from 2023 to 2027</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>&#8364;2.14 million announced in budget 2023 for 2023</text>
+		    </paragraph>
+		    <paragraph>
+		      <text>Average of &#8364;2 billion funding schemes</text>
+		    </paragraph>
+		    <paragraph>
+		      <text></text>
+		    </paragraph>
+		    <paragraph>
+		      <text>The total of the annual carbon tax receipts as calculated in Section \
+		\ref{} page \ref{} is 1.067 billion + 1.232 billion + 1.397 billion + \
+		1.562 billion + 1.727 billion + 1.892 billion + 2.057 billion + 2.222 \
+		billion = a total of 13.156 billion euros in carbon tax receipts from \
+		agriculture if annual average \ce{CO2} emissions are 22 million \
+		tonnes.</text>
+		    </paragraph>
+		  </paragraphlayout>
+		</richtext>
+	|
+
+ratio to hemp land to desired=
+	Hemp Land/DESIRED HEMP LAND
+	~	Dmnl
+	~		|
+
+effect of hemp ratio on growth=
+	1-ratio to hemp land to desired
+	~	
+	~		|
+
+FRACTION OF HEMP GROWTH=
+	0.88
+	~	Dmnl/year
+	~		|
+
+********************************************************
+	.12mayhacsbase run[57]
+********************************************************~
+		<?xml version="1.0" encoding="UTF-8"?>
+		<richtext version="1.0.0.0" xmlns="http://www.wxwidgets.org">
+		  <paragraphlayout textcolor="#000000" fontpointsize="13" fontfamily="72" \
+		fontstyle="90" fontweight="400" fontunderlined="0" \
+		fontface=".AppleSystemUIFont" alignment="1" parspacingafter="10" \
+		parspacingbefore="0" linespacing="10" margin-left="5,4098" \
+		margin-right="5,4098" margin-top="5,4098" margin-bottom="5,4098">
+		    <paragraph>
+		      <text></text>
+		    </paragraph>
+		  </paragraphlayout>
+		</richtext>
+	|
+
+additional hemp land=
+	effect of hemp ratio on growth*FRACTION OF HEMP GROWTH*Hemp Land
+	~	hectares/year
+	~		|
+
+emission reduction=
+	(AVERAGE ANNUAL EMISSIONS'-annual emissions ) / AVERAGE ANNUAL EMISSIONS'
+	~	Dmnl
+	~		|
+
+Agricultural Land= INTEG (
+	-reduction in agricultural land,
+		INITIAL AGRICULTURAL LAND)
+	~	hectares
+	~		|
+
+annual emissions=
+	emissions from agriculture-hemp sequestrating
+	~	tonnes/year
+	~		|
+
+AVERAGE ANNUAL EMISSIONS'=
+	2.2e+07
+	~	tonnes/year
+	~	2.15e+07
+	|
+
+DESIRED HEMP LAND=
+	390000
+	~	hectares
+	~		|
+
+emissions from agriculture=
+	Agricultural Land*emissions per hectare of agriculture
+	~	tonnes/year
+	~		|
+
+emissions per hectare of agriculture=
+	AVERAGE ANNUAL EMISSIONS'/TOTAL LAND
+	~	tonnes/hectares/year
+	~		|
+
+INITIAL AGRICULTURAL LAND=
+	TOTAL LAND*(1-INITIAL FRACTION OF HEMP LAND)
+	~	hectares
+	~		|
+
+INITIAL FRACTION OF HEMP LAND=
+	0.011
+	~	Dmnl
+	~	0.007 total land
+	|
+
+INITIAL HEMP LAND=
+	TOTAL LAND*INITIAL FRACTION OF HEMP LAND
+	~	hectares
+	~	0-2016
+		76-2017
+		230
+		547
+		362
+		251
+		163
+	|
+
+reduction in agricultural land=
+	additional hemp land
+	~	hectares/year
+	~		|
+
+hemp sequestrating=
+	Hemp Land*SEQUESTERING RATE
+	~	tonnes/year
+	~		|
+
+Hemp Land= INTEG (
+	additional hemp land,
+		INITIAL HEMP LAND)
+	~	hectares
+	~		|
+
+SEQUESTERING RATE=
+	10
+	~	tonnes/hectares/year [0,10,1]
+	~		|
+
+TOTAL LAND=
+	4.9e+06
+	~	hectares
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 2030
+	~	year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 2023
+	~	year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.125
+	~	year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Arial|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,90,0
+10,1,Hemp Land,520,440,53,33,3,131,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+12,2,48,286,431,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(433,431)|
+1,4,5,2,68,0,0,22,0,0,0,-1--1--1,,1|(342,431)|
+11,5,0,394,431,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,additional hemp land,394,460,47,21,40,3,0,40,-1,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+10,7,TOTAL LAND,179,198,38,24,8,3,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+10,8,INITIAL HEMP LAND,267,125,51,35,8,131,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+1,9,8,1,1,0,0,0,0,64,1,-1--1--1,,1|(1236,-435)|
+10,10,SEQUESTERING RATE,555,591,61,19,8,3,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+12,11,0,1887,760,253,193,8,79,0,0,2,0,0,0,0,0,0,0,0,0
+emissions per hectare of agriculture,Graph
+10,12,hemp sequestrating,297,594,52,25,8,3,0,40,-1,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+1,13,1,12,1,0,0,0,0,192,0,-1--1--1,,1|(335,605)|
+1,14,10,12,1,0,0,0,0,192,0,-1--1--1,,1|(370,607)|
+10,15,annual emissions,207,424,35,18,8,3,0,40,-1,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+10,16,Agricultural Land,387,119,56,34,3,131,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+10,17,INITIAL AGRICULTURAL LAND,89,125,62,28,8,3,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+12,18,48,612,112,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,21,18,4,0,0,22,0,0,0,-1--1--1,,1|(563,112)|
+1,20,21,16,100,0,0,22,0,0,0,-1--1--1,,1|(477,112)|
+11,21,0,518,112,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,22,reduction in agricultural land,518,139,50,19,40,3,0,40,-1,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+1,23,17,16,1,0,0,0,0,64,1,-1--1--1,,1|(217,175)|
+10,24,INITIAL FRACTION OF HEMP LAND,181,32,50,23,8,3,0,40,0,0,0,0,-1--1--1,-1--1--1,Arial|14||0-0-0,0,0,0,0,0,0
+1,25,7,17,1,0,0,0,0,64,0,-1--1--1,,1|(124,180)|
+1,26,24,8,1,0,0,0,0,64,0,-1--1--1,,1|(252,45)|
+1,27,7,8,1,0,0,0,0,64,0,-1--1--1,,1|(249,171)|
+1,28,24,17,1,0,0,0,0,64,0,-1--1--1,,1|(97,85)|
+10,29,emissions per hectare of agriculture,87,301,45,17,8,3,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+10,30,AVERAGE ANNUAL EMISSIONS',83,431,46,28,8,3,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+1,31,7,29,1,0,0,0,0,64,0,-1--1--1,,1|(95,239)|
+1,32,30,29,1,0,0,0,0,64,0,-1--1--1,,1|(21,363)|
+1,33,12,15,1,0,0,0,0,64,0,-1--1--1,,1|(239,546)|
+10,34,emissions from agriculture,211,309,47,19,8,3,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+1,35,29,34,1,0,0,0,0,64,0,-1--1--1,,1|(151,252)|
+1,36,34,15,1,0,0,0,0,64,0,-1--1--1,,1|(271,364)|
+1,37,16,34,1,0,0,0,0,64,0,-1--1--1,,1|(246,237)|
+1,38,6,22,1,0,0,0,0,64,0,-1--1--1,,1|(414,283)|
+10,39,DESIRED HEMP LAND,586,269,37,25,8,3,0,40,0,0,0,0,0-0-0,0-0-0,Arial|14||0-0-0,0,0,0,0,0,0
+1,40,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(488,506)|
+10,41,emission reduction,85,526,43,23,8,3,0,40,-1,0,0,0,-1--1--1,-1--1--1,Arial|14||0-0-0,0,0,0,0,0,0
+1,42,15,41,1,0,0,0,0,192,0,-1--1--1,,1|(135,520)|
+1,43,30,41,1,0,0,0,0,192,0,-1--1--1,,1|(29,488)|
+12,44,0,1558,471,391,271,8,15,0,0,1,0,0,0,0,0,0,0,0,0
+Government_Money_Stock_a
+10,45,ratio to hemp land to desired,587,353,47,23,8,3,0,42,-1,0,0,0,-1--1--1,-1--1--1,Arial|14||0-0-0,0,0,0,0,0,0
+1,46,1,45,1,0,0,0,0,192,0,-1--1--1,,1|(569,483)|
+10,47,effect of hemp ratio on growth,470,354,54,18,8,3,0,42,-1,0,0,0,-1--1--1,-1--1--1,Arial|14||0-0-0,0,0,0,0,0,0
+1,48,45,47,1,0,0,0,0,192,0,-1--1--1,,1|(486,334)|
+10,49,FRACTION OF HEMP GROWTH,291,505,53,19,8,3,0,42,-1,0,0,0,-1--1--1,-1--1--1,Arial|14||0-0-0,0,0,0,0,0,0
+1,50,49,6,1,0,0,0,0,192,0,-1--1--1,,1|(369,511)|
+1,51,47,5,1,0,0,0,0,192,0,-1--1--1,,1|(420,358)|
+1,52,39,45,1,0,0,0,0,192,0,-1--1--1,,1|(621,309)|
+///---\\\
+:GRAPH Government_Money_Stock_a
+:TITLE Taxes in Credits Out
+:SCALE
+:VAR co2 tax
+:LINE-WIDTH 3
+:VAR co2 credits
+:LINE-WIDTH 3
+:L<%^E!@
+1:Base Run.vdfx
+4:Time
+5:additional hemp land
+9:Base Run
+19:90,0
+21:25% reduction in CO2 emissions by 2030
+24:2023
+25:2030
+26:2030
+22:$,Dollar,Dollars,$s
+22:Day,Days
+22:hectare,hectares
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+23:0
+15:0,0,0,0,0,0
+27:3,
+34:0,
+42:0
+72:0
+73:0
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:0
+41:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Times New Roman|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
